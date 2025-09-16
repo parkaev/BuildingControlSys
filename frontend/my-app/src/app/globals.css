@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --backgroundFirst: #F5F7F9;
+  --backgroundSecond: #FFFFFF;
+  --accentFirst: #3F3F3F;
+  --accentSecond: #DDDEE2;
+  --accentThird: #8F8F8F;
+  --accentFourth: #6B6B6B;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /*--backgroundFirst: #1E1E1E;*/
+    /*--backgroundSecond: #2A2A2A;*/
+    /*--accentFirst: #EAEAEA;*/
+    /*--accentSecond: #B0B0B0;*/
+    /*--accentThird: #7A7A7A;*/
+    /*--accentFourth: #9A9A9A;*/
+
+    --backgroundFirst: #F5F7F9;
+    --backgroundSecond: #FFFFFF;
+    --accentFirst: #3F3F3F;
+    --accentSecond: #DDDEE2;
+    --accentThird: #8F8F8F;
+    --accentFourth: #6B6B6B;
+  }
+}
+
+@theme inline {
+  --color-backgroundFirst: var(--backgroundFirst);
+  --color-backgroundSecond: var(--backgroundSecond);
+  --color-accentFirst: var(--accentFirst);
+  --color-accentSecond: var(--accentSecond);
+  --color-accentThird: var(--accentThird);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto/static/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: auto;
+}
+
+/*GLOBAL STYLES*/
+
+body {
+  background: var(--backgroundFirst);
+  color: var(--accentFirst);
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0;
+}
