@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
     return (
-        <header className="w-full max-h-[80px] flex flex-row gap-2 my-[10px]">
+        <header className="w-full max-h-[80px] flex flex-row gap-2 py-[10px]">
             {/* Логотип */}
             <NavLink to={"/"}>
-                <div className="flex items-center p-2 bg-backgroundSecond rounded-[50px] w-[225px] h-[60px]">
+                <div className="flex items-center p-2 bg-backgroundSecond rounded-[50px] w-[225px] h-[60px] border-2 border-accentSecond">
                     <img
                         src="/svgs/DM_logo.svg"
                         alt="Логотип"
@@ -17,15 +17,15 @@ function Header() {
             </NavLink>
 
             {/* Основное меню и профиль */}
-            <div className="flex flex-row justify-between p-4 bg-backgroundSecond rounded-[50px] w-full h-[60px]">
+            <div className="flex flex-row justify-between p-4 bg-backgroundSecond rounded-[50px] w-full h-[60px] border-2 border-accentSecond">
                 {/* Навигация */}
                 <div className="flex flex-row items-center gap-4 text-[20px]">
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
                             isActive
-                                ? "border-b-1 border-accentFirst"
-                                : "hover:text-black ease-in-out duration-200"
+                                ? "border-b-2 border-accentThird"
+                                : "hover:text-black ease-in-out"
                         }
                     >
                         Главная
@@ -34,8 +34,8 @@ function Header() {
                         to="/report"
                         className={({ isActive }) =>
                             isActive
-                                ? "border-b-1 border-accentFirst"
-                                : "hover:text-black ease-in-out duration-200"
+                                ? "border-b-2 border-accentThird"
+                                : "hover:text-black ease-in-out"
                         }
                     >
                         Отчет
@@ -44,8 +44,8 @@ function Header() {
                         to="/requests"
                         className={({ isActive }) =>
                             isActive
-                                ? "border-b-1 border-accentFirst"
-                                : "hover:text-black ease-in-out duration-200"
+                                ? "border-b-2 border-accentThird"
+                                : "hover:text-black ease-in-out"
                         }
                     >
                         Заявки

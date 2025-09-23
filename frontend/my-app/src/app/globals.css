@@ -17,13 +17,6 @@
     /*--accentSecond: #B0B0B0;*/
     /*--accentThird: #7A7A7A;*/
     /*--accentFourth: #9A9A9A;*/
-
-    --backgroundFirst: #F5F7F9;
-    --backgroundSecond: #FFFFFF;
-    --accentFirst: #3F3F3F;
-    --accentSecond: #DDDEE2;
-    --accentThird: #8F8F8F;
-    --accentFourth: #6B6B6B;
   }
 }
 
@@ -33,6 +26,7 @@
   --color-accentFirst: var(--accentFirst);
   --color-accentSecond: var(--accentSecond);
   --color-accentThird: var(--accentThird);
+  --accentFourth: var(--accentFourth);
 }
 
 @font-face {

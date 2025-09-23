@@ -4,9 +4,9 @@ import Header from './compoents/Header.tsx';
 
 function App() {
     return (
-        <div className="container">
+        <div className="container min-h-screen">
             <Header/>
-            <div className="min-h-screen">
+            <div>
                 <Outlet/>
             </div>
         </div>
