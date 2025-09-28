@@ -1,10 +1,23 @@
 from fastapi import FastAPI
-import models, database, utils, schemas
-from auth import router as auth_router
-from admin import router as admin_router
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
+import models, schemas
+from core import database, utils
+from routers import auth, admin
 
-app = FastAPI(title="DefectManager")
+app = FastAPI(
+    title="BuildingControlSys",
+    description="Система управления зданиями",
+    version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup():
@@ -15,14 +28,18 @@ async def startup():
         result = await session.execute(select(models.User))
         first_user = result.scalars().first()
         if not first_user:
-            admin = models.User(
+            admin_user = models.User(
                 username="admin",
                 hashed_password=utils.get_password_hash("admin"),
                 role=schemas.RoleEnum.admin
             )
-            session.add(admin)
+            session.add(admin_user)
             await session.commit()
-            print("Создан пользователь log:admin/psw:admin")
+            print("Создан пользователь admin/admin")
 
-app.include_router(auth_router, prefix="/auth")
-app.include_router(admin_router)
+app.include_router(auth.router)
+app.include_router(admin.router)
+
+@app.get("/")
+async def root():
+    return {"message": "BuildingControlSys API"}
