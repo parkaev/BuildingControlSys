@@ -3,8 +3,10 @@ from enum import Enum
 from typing import Optional
 
 class RoleEnum(str, Enum):
-    user = "user"
     admin = "admin"
+    user = "user"
+    manager = "manager"
+    boss = "boss"
 
 class UserCreate(BaseModel):
     username: str

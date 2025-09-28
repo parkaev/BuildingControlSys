@@ -1,20 +1,25 @@
-import type {ReactNode} from "react";
+import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 type Props = {
     children: ReactNode;
-    roles?: string[]; // если роли указаны, проверяем доступ
+    roles?: string[]; // роли, которым разрешен доступ
 };
 
 export const ProtectedRoute = ({ children, roles }: Props) => {
     const { user, loading } = useAuth();
 
-    if (loading) return <div>Загрузка...</div>; // можно поставить спиннер
+    if (loading) return <div>Загрузка...</div>; // можно заменить на спиннер
 
-    if (!user) return <Navigate to="/auth" />; // не залогинен
+    // если не авторизован → редирект
+    if (!user) return <Navigate to="/auth" replace />;
 
-    if (roles && !roles.includes(user.role)) return <Navigate to="/" />; // нет прав
+    // если есть список ролей и роль пользователя туда не входит
+    // но при этом он не admin → редирект
+    if (roles && !roles.includes(user.role) && user.role !== "admin") {
+        return <Navigate to="/" replace />;
+    }
 
     return <>{children}</>;
 };
