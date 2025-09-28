@@ -7,7 +7,7 @@ from routers import auth, admin
 
 app = FastAPI(
     title="BuildingControlSys",
-    description="Система управления зданиями",
+    # description="Система управления дефектами",
     version="1.0.0"
 )
 

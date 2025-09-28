@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"; // путь проверь
 
 export default function Auth() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { user, login } = useAuth();
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     const handleLogin = async () => {
-        setError(""); // сброс ошибки перед запросом
+        setError("");
 
         try {
             const response = await fetch("http://localhost:8000/auth/login", {
@@ -27,10 +35,9 @@ export default function Auth() {
             }
 
             const data = await response.json();
-            localStorage.setItem("token", data.access_token);
 
-            // после успешного логина перенаправляем, например, на главную
-            navigate("/");
+            // вместо прямого localStorage — используем login из контекста
+            login(data.access_token);
         } catch (err: any) {
             setError(err.message || "Ошибка авторизации");
         }
