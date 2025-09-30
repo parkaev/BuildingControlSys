@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { API_URL } from "../config.ts";
+import { API_URL } from "../config/config.ts";
 
 type User = {
     username: string;
