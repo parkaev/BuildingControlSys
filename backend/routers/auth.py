@@ -21,7 +21,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession
         raise HTTPException(status_code=401, detail="User is inactive")
     return user
 
-@router.post("/login", response_model=schemas.Token)
+@router.post("/login", response_model=schemas.Token, operation_id="login_auth")
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(database.get_db)):
     result = await db.execute(select(models.User).where(models.User.username == form_data.username))
     user = result.scalars().first()
@@ -34,6 +34,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSessi
     token = utils.create_access_token({"sub": user.username})
     return {"access_token": token, "token_type": "bearer"}
 
-@router.get("/me", response_model=schemas.UserProfile)
+@router.get("/me", response_model=schemas.UserProfile, operation_id="get_current_user_profile")
 async def get_current_user_profile(current_user: models.User = Depends(get_current_user)):
     return current_user

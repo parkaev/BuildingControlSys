@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
 import models, schemas
 from core import database, utils
-from routers import auth, admin
+from routers import auth, admin, projects, objects, defects, comments, attachments
 
 app = FastAPI(
     title="BuildingControlSys",
@@ -39,6 +39,11 @@ async def startup():
 
 app.include_router(auth.router)
 app.include_router(admin.router)
+app.include_router(projects.router)
+app.include_router(objects.router)
+app.include_router(defects.router)
+app.include_router(comments.router)
+app.include_router(attachments.router)
 
 @app.get("/")
 async def root():
